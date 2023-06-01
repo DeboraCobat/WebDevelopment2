@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Address Book</h1>
+  
+  <div class="user-selection">
+    <input type="radio" id="student" name="user-type" value="student" checked>
+    <label for="student">Student</label>
+  
+    <input type="radio" id="teacher" name="user-type" value="teacher">
+    <label for="teacher">Teacher</label>
+  </div>
+  
+  <div id="user-list"></div>
+  
+  <div id="user-details-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title"></h2>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+</html>
