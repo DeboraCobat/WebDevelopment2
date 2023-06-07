@@ -44,33 +44,35 @@ const defaultUsers = [
 
 
 export default function AddressBook() {
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUserType, setSelectedUserType] = useState(null);
   const [users, setUsers] = useState(defaultUsers);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalUser, setModalUser] = useState(null);
 
   const filteredUsers = users.filter(user =>
-    user.type === (selectedUser ? selectedUser.value : user.type)
+    user.type === (selectedUserType ? selectedUserType.value : user.type)
   );
 
   const handleUserSelect = selectedOption => {
-    setSelectedUser(selectedOption);
+    setSelectedUserType(selectedOption);
   };
 
   const handleAddUser = () => {
-    if (selectedUser) {
+    if (selectedUserType) {
       const newUser = {
         id: Date.now(),
         name: 'Michel Tremblay',
         address: '4006 Rue Saint-Denis, Montreal, QC',
-        image: 'images/alexandre.jpg',
-        type: selectedUser.value
+        image: 'alexandre.jpg',
+        type: selectedUserType.value
       };
       setUsers(prevUsers => [...prevUsers, newUser]);
     }
   };
 
-  const handleImageClick = () => {
+  const handleImageClick = (user) => {
     setModalIsOpen(true);
+    setModalUser(user);
   };
 
   const closeModal = () => {
@@ -83,12 +85,12 @@ export default function AddressBook() {
 
       <Select
         options={options}
-        value={selectedUser}
+        value={selectedUserType}
         onChange={handleUserSelect}
         placeholder="Select user type"
       />
 
-      <button onClick={handleAddUser} disabled={!selectedUser}>
+      <button onClick={handleAddUser} disabled={!selectedUserType}>
         Add User
       </button>
 
@@ -106,7 +108,7 @@ export default function AddressBook() {
               <td>{user.name}</td>
               <td>{user.address}</td>
               <td>
-                <div onClick={handleImageClick} style={{ cursor: 'pointer' }}>
+                <div onClick={() => handleImageClick(user)} style={{ cursor: 'pointer' }}>
                   <Image
                     src={`/${user.image}`}
                     alt={user.name}
@@ -130,20 +132,20 @@ export default function AddressBook() {
           },
           content: {
             border: 'none',
-            borderRadius: '8px',
+            borderRadius: '10px',
             boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
             padding: '20px',
             width: '300px',
             margin: 'auto'
-          }
+          } 
         }}
       >
-        {selectedUser && (
+        {modalUser && (
           <div>
-            <h2>{selectedUser.label} Details</h2>
-            <div key={selectedUser.id}>
-              <p>Name: {selectedUser.name}</p>
-              <p>Address: {selectedUser.address}</p>
+            <h2>{modalUser.label} Details</h2>
+            <div key={modalUser.id}>
+              <p>Name: {modalUser.name}</p>
+              <p>Address: {modalUser.address}</p>
             </div>
           </div>
         )}
@@ -152,7 +154,6 @@ export default function AddressBook() {
           Close
         </button>
       </Modal>
-
     </div>
   );
 }
