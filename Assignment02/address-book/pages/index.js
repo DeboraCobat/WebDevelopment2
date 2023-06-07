@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Select from 'react-select';
 import Modal from 'react-modal';
+import Image from 'next/image';
 import 'materialize-css/dist/css/materialize.min.css';
 
 Modal.setAppElement('#__next');
@@ -15,28 +16,28 @@ const defaultUsers = [
     id: 1,
     name: 'Emily Tremblay',
     address: '321 Rue Principale, Montreal, QC',
-    image: 'images/emily.jpg',
+    image: 'public/emily.jpg',
     type: 'student'
   },
   {
     id: 2,
     name: 'Dr. Isabelle Lefebvre',
     address: '987 Rue Sherbrooke, Montreal, QC',
-    image: 'images/isabelle.jpg',
+    image: 'public/isabelle.jpg',
     type: 'teacher'
   },
   {
     id: 3,
     name: 'Alexandre Gagnon',
     address: '654 Rue Sainte-Catherine, Montreal, QC',
-    image: 'images/alexandre.jpg',
+    image: 'public/alexandre.jpg',
     type: 'student'
   },
   {
     id: 4,
     name: 'Prof. Mathieu Dubois',
     address: '456 Rue Saint-Denis, Montreal, QC',
-    image: 'images/mathieu.jpg',
+    image: 'public/mathieu.jpg',
     type: 'teacher'
   }
 ];
@@ -104,14 +105,14 @@ export default function AddressBook() {
               <td>{user.name}</td>
               <td>{user.address}</td>
               <td>
-                {/* <img
-                  src={user.image}
-                  alt={user.name}
-                  width="50"
-                  height="50"
-                  onClick={handleImageClick}
-                  style={{ cursor: 'pointer' }}
-                /> */}
+                <div onClick={handleImageClick} style={{ cursor: 'pointer' }}>
+                  <Image
+                    src={`/public/${user.image}`}
+                    alt={user.name}
+                    width={50}
+                    height={50}
+                  />
+                </div>
               </td>
             </tr>
           ))}
