@@ -140,12 +140,10 @@ export default function AddressBook() {
         {selectedUser && (
           <div>
             <h2>{selectedUser.label} Details</h2>
-            {filteredUsers.map(user => (
-              <div key={user.id}>
-                <p>Name: {user.name}</p>
-                <p>Address: {user.address}</p>
-              </div>
-            ))}
+            <div key={selectedUser.id}>
+              <p>Name: {selectedUser.name}</p>
+              <p>Address: {selectedUser.address}</p>
+            </div>
           </div>
         )}
 
@@ -153,6 +151,7 @@ export default function AddressBook() {
           Close
         </button>
       </Modal>
+
     </div>
   );
 }
